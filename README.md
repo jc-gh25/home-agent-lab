@@ -1,8 +1,37 @@
-# llm-autonomous-chat
+# LLM Autonomous Chat
 
-A minimal home rig for running autonomous conversations between locally hosted LLMs — and the logs of what happened.
+A small, locally run harness for exploratory two-agent LLM conversations.
 
-Two models, an alternating loop, a topic, and a turn limit. Built on LM Studio + Open WebUI with a custom pipe function.
+Two models alternate turns under configurable prompts and conversation-history
+conditions. The harness records full transcripts, including available
+working-note traces, to support qualitative study of long-horizon interaction:
+agreement retention, context drift, confabulation, social role formation, and
+the effects of task framing.
+
+This is not a benchmark suite and the included runs are not statistical
+evidence. They are inspectable case studies intended to generate testable
+questions.
+
+## Start here
+
+- [Methods and limitations](METHODS.md)
+- [Experiment log index](runs/README.md)
+- [Raw experiment logs](runs/)
+- [Pipe implementation](llm_autonomous_chat.py)
+
+## Example questions
+
+- What happens when two agents reach an agreement but lack a shared external
+  record of it?
+- How does an imposed deadline change a cooperative decision?
+- Does task and role framing change whether agents generate procedures,
+  artifacts, or social interaction?
+- How do models differ when context continuity degrades?
+
+## Status
+
+Active personal research project. Logs and methods are published as they are
+reviewed and prepared for public discussion.
 
 ## Why
 
