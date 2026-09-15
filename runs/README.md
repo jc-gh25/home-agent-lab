@@ -19,9 +19,9 @@ aids, not conclusions.
 ## Current layout
 
 Existing v1.9 logs remain in this directory temporarily so their current
-repository links stay stable. New v2.0 research-fork runs should be committed
-as matching `.txt` and `.jsonl` pairs. When logs are reorganized locally in the
-future, use this structure:
+repository links stay stable. New v2.0 research-fork runs are committed as
+matching `.txt` and `.jsonl` pairs in this same directory for now. When logs
+are reorganized locally in the future, use this structure:
 
 ```text
 runs/
@@ -53,18 +53,9 @@ this index and any public links at the same time.
 
 ## v2.0 research-fork runs
 
-No v2.0 raw run files are committed yet.
-
-When adding one, include both files:
-
-```text
-runs/v2.0/two_llm_chat_YYYY-MM-DD_HH-MM-SS.txt
-runs/v2.0/two_llm_chat_YYYY-MM-DD_HH-MM-SS.jsonl
-```
-
-Label early validation runs clearly as **smoke tests**. The first 5-round
-shared-note test should be indexed as a smoke test, not as evidence that the
-condition works at long horizons.
+| File | Date | Topic / condition | Why it may be useful |
+|---|---:|---|---|
+| [`two_llm_chat_2026-09-14_15-48-36.txt`](two_llm_chat_2026-09-14_15-48-36.txt) ([sidecar](two_llm_chat_2026-09-14_15-48-36.jsonl)) | 2026-09-14 | One heater; durable shared note enabled (`SHARED_NOTE=latest`); 5-round smoke test | First run of the research fork. Verifies the run header, per-turn `[Turn metrics]` line, and JSONL sidecar. The durable note held the settlement line verbatim across all 5 rounds — a promising early signal, not a long-horizon result. A longer run under the same settings is the natural follow-up. |
 
 ## Notes
 
