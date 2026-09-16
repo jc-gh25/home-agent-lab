@@ -36,7 +36,7 @@ runs/
 Use `git mv` for that local reorganization so history remains readable. Update
 this index and any public links at the same time.
 
-## Notable v1.9 sandbox-fork runs
+## Selected v1.9 sandbox-fork runs
 
 | File | Date | Topic / condition | Why it may be useful |
 |---|---:|---|---|
