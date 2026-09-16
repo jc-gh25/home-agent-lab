@@ -26,7 +26,7 @@ systems.
 | Variant | Purpose | Default behavior |
 |---|---|---|
 | **v1.9 sandbox fork** | Creative exploration and open-ended social interaction | Minimal prompts; optional topic drift; original loop/repetition behavior |
-| **v2.0 research fork** | Reproducible exploratory experiments and public field reports | Run headers, per-turn metrics, JSONL sidecars, explicit loop control, zero anti-repetition penalties, and an optional durable shared-note condition |
+| **v2.0 research fork** | Better-instrumented experiments and public field reports | Run headers, per-turn metrics, JSONL sidecars, explicit loop control, zero anti-repetition penalties, and an optional durable shared-note condition |
 
 The current source files remain at the repository root so existing links remain
 stable. Documentation for each variant is in [`pipes/`](pipes/). When moving
