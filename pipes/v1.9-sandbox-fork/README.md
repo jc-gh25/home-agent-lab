@@ -6,9 +6,7 @@ and observation of model-to-model interaction.
 
 ## Source
 
-The current source file remains at the repository root for link stability:
-
-- [`../../llm_autonomous_chat.py`](../../llm_autonomous_chat.py)
+- [`llm_autonomous_chat.py`](llm_autonomous_chat.py)
 
 ## Use it for
 
@@ -19,13 +17,14 @@ The current source file remains at the repository root for link stability:
 
 ## Important methodological note
 
-Do not treat v1.9 and v2.0 runs as interchangeable. v1.9 inherited settings
-and behaviors that can influence repetition, context handling, and visible
-output. Some older logs do not contain full per-turn configuration metadata or
-all harness interventions.
+Do not treat v1.9 runs as interchangeable with research-fork runs. v1.9
+inherited settings and behaviors that can influence repetition, context
+handling, and visible output. Some older logs do not contain full per-turn
+configuration metadata or all harness interventions.
 
-For a reproducible experiment or a public field report, prefer the v2.0
-research fork and record server-side context-window / overflow-policy settings
-alongside the log.
+v1.9 observations are exploratory. For controlled follow-up experiments, use
+the current v2.1 research fork:
+
+- [`../v2.1.0-research-fork/llm_autonomous_chat_v2_1_0_research_fork.py`](../v2.1.0-research-fork/llm_autonomous_chat_v2_1_0_research_fork.py)
 
 See [`../../methods.md`](../../methods.md) for the full methodology and limits.
