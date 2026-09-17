@@ -23,7 +23,7 @@ systems.
 - [v2.0 research pipe](llm_autonomous_chat_v2_research_fork.py)
 - [v2.1 research pipe](pipes/v2.1.0-research-fork/llm_autonomous_chat_v2_1_0_research_fork.py)
 
-## Two pipe variants
+## Pipe variants
 
 | Variant | Purpose | Default behavior |
 |---|---|---|
@@ -74,9 +74,9 @@ home-agent-lab/
 ## Status
 
 Active independent research project. I am preparing source-linked field reports
-from selected runs for [Substack](https://edwinmassey.substack.com/). The code,
-methods, and selected raw logs are published so that readers can distinguish
-what a run shows from what I infer from it.
+from selected runs for reports on [Substack](https://edwinmassey.substack.com/). 
+The code, methods, and selected raw logs are published so that readers can 
+distinguish what a run shows from what I infer from it.
 
 ## Notes for readers
 
