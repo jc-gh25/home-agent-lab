@@ -55,24 +55,25 @@ runs/
 
 | File | Date | Topic / condition | Why it may be useful |
 |---|---:|---|---|
-| [`two_llm_chat_2026-09-14_15-48-36.txt`](two_llm_chat_2026-09-14_15-48-36.txt) ([sidecar](two_llm_chat_2026-09-14_15-48-36.jsonl)) | 2026-09-14 | One heater; durable shared note enabled (`SHARED_NOTE=latest`); 5-round smoke test | First run of the research fork. Verifies the run header, per-turn `[Turn metrics]` line, and JSONL sidecar. The durable note held the settlement line verbatim across all 5 rounds — a promising early signal, not a long-horizon result. A longer run under the same settings is the natural follow-up. |
+| [`two_llm_chat_2026-09-14_15-48-36.txt`](two_llm_chat_2026-09-14_15-48-36.txt) ([sidecar](two_llm_chat_2026-09-14_15-48-36.jsonl)) | 2026-09-14 | One heater; durable shared note enabled (`SHARED_NOTE=latest`); 5-round smoke test | First run of the research fork. Verifies the run header, per-turn `[Turn metrics]` line, and JSONL sidecar. The durable note held the settlement line verbatim across all 5 rounds — a promising early signal. |
 
 ## v2.1 research-fork status
 
-The v2.1 pipe has been locally smoke-tested for safe API-key redaction, baseline logging, shared-note capture and
-reinjection, and stream-outcome labeling. These checks verify the instrument's basic plumbing.
+v2.1 was created to add per-run configuration resolution and presets, duplicate-run-tag protection, pre-flight checks, richer LM Studio provenance capture, and client-observed timing fields. It retains the v2.0 run-header, JSONL sidecar, context-budget, loop-control, and optional shared-note approach.
 
-The first controlled v2.1 series will compare matched heater conditions:
+The v2.1 pipe has been locally smoke-tested for safe API-key redaction, baseline logging, shared-note capture and reinjection, and stream-outcome labeling. These checks verify the instrument's basic plumbing.
 
-- **Baseline:** `SHARED_NOTE=off`
+The first v2.1 heater baseline has completed:
+
+| Files | Date | Topic / condition | Status |
+|---|---:|---|---|
+| [`two_llm_chat_2026-09-17_02-39-20.txt`](two_llm_chat_2026-09-17_02-39-20.txt) ([sidecar](two_llm_chat_2026-09-17_02-39-20.jsonl)) | 2026-09-17 | One heater; `SHARED_NOTE=off`; 200 rounds | Completed with matched 50K declared context windows, a 40K pipe context budget, temperature 0.8, zero presence/frequency penalties, loop detection off, and reasoning not shared. The run confirms v2.1 headers, resolved configuration logging, per-turn metrics, pipe-level transcript-windowing records, and JSONL output under a long run. |
+
+The next planned comparison condition is:
+
 - **Shared note:** `SHARED_NOTE=latest`
 
-The same models, system prompts, topic wording, sampling settings, context
-configuration, loop-detection setting, and run length should be used in both
-conditions. The task must request a standardized agreement line beginning with
-the configured note prefix, normally `The arrangement, as agreed:`. In the
-shared-note condition, the harness retains the latest matching line and injects
-it before the windowed quoted transcript on later turns.
+For a matched shared-note run, retain the same models, system prompts, topic wording, sampling settings, context configuration, loop-detection setting, token limits, and run length. The shared-note condition additionally needs a standardized agreement line beginning with the configured note prefix, normally `The arrangement, as agreed:`. In that condition, the harness retains the latest matching line and injects it before the windowed quoted transcript on later turns.
 
 ## Notes
 
