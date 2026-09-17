@@ -6,9 +6,7 @@ controls and logs for exploratory, reproducible experiments.
 
 ## Source
 
-The current source file remains at the repository root for link stability:
-
-- [`../../llm_autonomous_chat_v2_research_fork.py`](../../llm_autonomous_chat_v2_research_fork.py)
+- [`llm_autonomous_chat_v2_research_fork.py`](llm_autonomous_chat_v2_research_fork.py)
 
 ## What v2.0 adds
 
@@ -51,22 +49,29 @@ SHARED_NOTE = latest
 SHARED_NOTE_CAPTURE_PREFIX = The arrangement, as agreed:
 ```
 
-The pipe will capture the last visible line beginning with that prefix in each
-participant reply and inject the current captured value into both future prompts
-as a durable record. This condition is intended for experiments on agreement
-retention and memory; it is not a claim that the note represents ground truth.
+The pipe captures the last visible line beginning with that prefix in each
+participant reply and injects the current captured value into both future
+prompts as a durable record. This condition is intended for experiments on
+agreement retention and memory; it is not a claim that the note represents
+ground truth.
+
+## Version status
+
+v2.0 is retained as the first instrumented research fork. For new controlled
+follow-up experiments, use v2.1:
+
+- [`../v2.1.0-research-fork/llm_autonomous_chat_v2_1_0_research_fork.py`](../v2.1.0-research-fork/llm_autonomous_chat_v2_1_0_research_fork.py)
+
+v2.1 retains the v2.0 controls and adds experiment presets, run manifests,
+duplicate run-tag protection, best-effort LM Studio/manual provenance capture,
+client-side timing fields, preflight mode, API-key redaction in JSONL logs, and
+a `stream_ended_without_output` label for blank backend-ended turns.
 
 ## Installing beside v1.9
 
-The research-fork source currently uses the same pipe id as the sandbox source:
-`two_llm_debate`. If both versions are installed in the same Open WebUI
-instance, change one `pipes()` entry to a unique id and display name before
-installing, for example:
-
-```python
-def pipes(self):
-    return [{"id": "two_llm_research", "name": "Two LLM Research"}]
-```
+The research-fork source uses the pipe id `two_llm_research`. If both versions
+are installed in the same Open WebUI instance, ensure every installed pipe has
+a unique `pipes()` id and display name.
 
 See [`../../methods.md`](../../methods.md) for methods, limitations, and
 reporting guidance.
