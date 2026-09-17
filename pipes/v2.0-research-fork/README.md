@@ -6,7 +6,7 @@ controls and logs for exploratory, reproducible experiments.
 
 ## Source
 
-- [`llm_autonomous_chat_v2_research_fork.py`](llm_autonomous_chat_v2_research_fork.py)
+- [`llm_autonomous_chat_v2_0__research_fork.py`](llm_autonomous_chat_v2_0__research_fork.py)
 
 ## What v2.0 adds
 
