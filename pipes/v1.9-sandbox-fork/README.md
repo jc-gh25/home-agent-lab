@@ -6,7 +6,7 @@ and observation of model-to-model interaction.
 
 ## Source
 
-- [`llm_autonomous_chat.py`](llm_autonomous_chat.py)
+- [`v1.9-sandbox-fork_autonomous_chat_v1.9.py`](v1.9-sandbox-fork_autonomous_chat_v1.9.py)
 
 ## Use it for
 
