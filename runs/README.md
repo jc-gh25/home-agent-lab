@@ -1,8 +1,8 @@
 # Experiment log index
 
-This directory contains raw local two-agent conversation logs. Timestamped file
-names preserve their original creation time. The summaries below are navigation
-aids, not conclusions.
+This directory contains selected raw local two-agent conversation logs.
+Timestamped file names preserve their original creation time. The summaries
+below are navigation aids, not conclusions.
 
 ## How to read a run
 
@@ -10,31 +10,31 @@ aids, not conclusions.
    available settings are part of the condition.
 2. Treat the transcript as evidence of what happened in that one run, not proof
    that the behavior generalizes.
-3. Check [`../methods.md`](../methods.md) for differences between the v1.9
-   sandbox fork and v2.0 research fork.
-4. Where a v2.0 `.jsonl` sidecar exists, keep it with the corresponding `.txt`
-   file. It is a machine-readable event log for analysis, not an additional
-   narrative transcript.
+3. Check [`../methods.md`](../methods.md) for differences among the v1.9
+   sandbox fork, v2.0 research fork, and v2.1 research fork.
+4. Where a research-fork `.jsonl` sidecar exists, it is a machine-readable event
+   log for analysis, not an additional narrative transcript.
 
 ## Current layout
 
-Existing v1.9 logs remain in this directory temporarily so their current
-repository links stay stable. New v2.0 research-fork runs are committed as
-matching `.txt` and `.jsonl` pairs in this same directory for now. When logs
-are reorganized locally in the future, use this structure:
+Legacy v1.9 and v2.0 logs remain in this directory as curiosities.
+
+v2.1 is the current controlled research fork.
+
+Logs might be reorganized in the future. A future layout could be:
 
 ```text
 runs/
 ├── README.md
 ├── v1.9/
 │   └── [sandbox-fork .txt logs]
-└── v2.0/
-    ├── [research-fork .txt logs]
-    └── [matching .jsonl sidecars]
+├── v2.0/
+│   ├── [research-fork .txt logs]
+│   └── [matching .jsonl sidecars]
+└── v2.1/
+    ├── [reviewed, selected .txt logs]
+    └── [reviewed, selected .jsonl sidecars]
 ```
-
-Use `git mv` for that local reorganization so history remains readable. Update
-this index and any public links at the same time.
 
 ## Selected v1.9 sandbox-fork runs
 
@@ -57,10 +57,29 @@ this index and any public links at the same time.
 |---|---:|---|---|
 | [`two_llm_chat_2026-09-14_15-48-36.txt`](two_llm_chat_2026-09-14_15-48-36.txt) ([sidecar](two_llm_chat_2026-09-14_15-48-36.jsonl)) | 2026-09-14 | One heater; durable shared note enabled (`SHARED_NOTE=latest`); 5-round smoke test | First run of the research fork. Verifies the run header, per-turn `[Turn metrics]` line, and JSONL sidecar. The durable note held the settlement line verbatim across all 5 rounds — a promising early signal, not a long-horizon result. A longer run under the same settings is the natural follow-up. |
 
+## v2.1 research-fork status
+
+The v2.1 pipe has been locally smoke-tested for safe API-key redaction, baseline logging, shared-note capture and
+reinjection, and stream-outcome labeling. These checks verify the instrument's basic plumbing.
+
+The first controlled v2.1 series will compare matched heater conditions:
+
+- **Baseline:** `SHARED_NOTE=off`
+- **Shared note:** `SHARED_NOTE=latest`
+
+The same models, system prompts, topic wording, sampling settings, context
+configuration, loop-detection setting, and run length should be used in both
+conditions. The task must request a standardized agreement line beginning with
+the configured note prefix, normally `The arrangement, as agreed:`. In the
+shared-note condition, the harness retains the latest matching line and injects
+it before the windowed quoted transcript on later turns.
+
 ## Notes
 
 - Missing visible output, a timeout, a reasoning-only turn, or an error is part
-  of the recorded run condition. Do not silently clean it away.
+  of the recorded run condition.
+- In v2.1, a turn with no visible output, no reasoning, and no server finish
+  reason is labeled `stream_ended_without_output`. Treat it as a backend or
+  transport irregularity until local server logs identify a cause.
 - Do not assume that working-note text is a complete or faithful account of a
   model's causal process.
-- Verify every exact quotation against its raw file before publishing.
