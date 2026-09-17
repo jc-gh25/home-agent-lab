@@ -1,4 +1,3 @@
-```markdown
 # Home Agent Lab
 
 A small, locally run lab for exploratory two-agent LLM conversations.
@@ -100,4 +99,3 @@ Code in this repository is available under the [MIT License](LICENSE). Raw
 model outputs may carry additional considerations depending on the underlying
 models and any service used to run them; review the applicable model and
 platform terms before reusing them.
-```
