@@ -31,12 +31,6 @@ systems.
 | **v2.0 research fork** | Earlier research-oriented instrumentation | Run headers, per-turn metrics, JSONL sidecars, explicit loop control, zero anti-repetition penalties, and an optional durable shared-note condition |
 | **v2.1 research fork** | Current controlled follow-up work | v2.0 instrumentation plus experiment presets, manifests, duplicate run-tag protection, local-server provenance fields, timing fields, and preflight mode |
 
-The v1.9 sandbox and v2.0 research sources remain at the repository root for
-their existing links. The current v2.1 research pipe lives in
-[`pipes/v2.1.0-research-fork/`](pipes/v2.1.0-research-fork/), alongside its
-version-specific documentation. When moving files locally in the future, use
-`git mv` and update this README and links in published posts.
-
 ## Example questions
 
 - What happens when two agents reach an agreement but lack a durable shared
@@ -49,32 +43,10 @@ version-specific documentation. When moving files locally in the future, use
 - What changes when the harness actively disrupts repetition versus allowing
   the conversation to loop or conclude?
 
-## Repository layout
-
-```text
-home-agent-lab/
-├── README.md
-├── methods.md
-├── LICENSE
-├── llm_autonomous_chat.py                  # v1.9 sandbox pipe
-├── llm_autonomous_chat_v2_research_fork.py # v2.0 research pipe
-├── pipes/
-│   ├── v1.9-sandbox-fork/
-│   │   └── README.md
-│   ├── v2.0-research-fork/
-│   │   └── README.md
-│   └── v2.1.0-research-fork/
-│       ├── README.md
-│       └── llm_autonomous_chat_v2_1_0_research_fork.py
-└── runs/
-    ├── README.md
-    └── [selected raw .txt logs; v2.0+ can create .jsonl sidecars]
-```
-
 ## Status
 
 Active independent research project. I am preparing source-linked field reports
-from selected runs for reports on [Substack](https://edwinmassey.substack.com/). 
+from selected runs for posts on [Substack](https://edwinmassey.substack.com/). 
 The code, methods, and selected raw logs are published so that readers can 
 distinguish what a run shows from what I infer from it.
 
