@@ -15,26 +15,13 @@ below are navigation aids, not conclusions.
 4. Where a research-fork `.jsonl` sidecar exists, it is a machine-readable event
    log for analysis, not an additional narrative transcript.
 
-## Current layout
+## Folder layout
 
 Legacy v1.9 and v2.0 logs remain in this directory as curiosities.
 
 v2.1 is the current controlled research fork.
 
-Logs might be reorganized in the future. A future layout could be:
-
-```text
-runs/
-├── README.md
-├── v1.9/
-│   └── [sandbox-fork .txt logs]
-├── v2.0/
-│   ├── [research-fork .txt logs]
-│   └── [matching .jsonl sidecars]
-└── v2.1/
-    ├── [reviewed, selected .txt logs]
-    └── [reviewed, selected .jsonl sidecars]
-```
+Logs might be reorganized in the future, with the runs organized into folders for each pipe version.
 
 ## Selected v1.9 sandbox-fork runs
 
