@@ -19,9 +19,9 @@ systems.
 - [Experiment-log index](runs/README.md)
 - [Raw experiment logs](runs/)
 - [Pipe versions and source](pipes/)
-- [v1.9 sandbox pipe](llm_autonomous_chat.py)
-- [v2.0 research pipe](llm_autonomous_chat_v2_research_fork.py)
-- [v2.1 research pipe](pipes/v2.1.0-research-fork/llm_autonomous_chat_v2_1_0_research_fork.py)
+- [v1.9 sandbox pipe source](pipes/v1.9-sandbox-fork/v1.9-sandbox-fork_autonomous_chat_v1.9.py)
+- [v2.0 research pipe source](pipes/v2.0-research-fork/llm_autonomous_chat_v2_0__research_fork.py)
+- [v2.1.0 research pipe source](pipes/v2.1.0-research-fork/llm_autonomous_chat_v2_1_0_research_fork.py)
 
 ## Pipe variants
 
