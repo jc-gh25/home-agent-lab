@@ -63,27 +63,30 @@ v2.1 was created to add per-run configuration resolution and presets, duplicate-
 
 The v2.1 pipe has been locally smoke-tested for safe API-key redaction, baseline logging, shared-note capture and reinjection, and stream-outcome labeling. These checks verify the instrument's basic plumbing.
 
-The v2.1 heater baseline and the matched shared-note comparison run have both completed:
+The v2.1 heater series — the baseline, the matched shared-note comparison, and the instruction-only arm — has completed:
 
 | Files | Date | Topic / condition | Status |
 |---|---:|---|---|
 | [`two_llm_chat_2026-09-17_02-39-20.txt`](two_llm_chat_2026-09-17_02-39-20.txt) ([sidecar](two_llm_chat_2026-09-17_02-39-20.jsonl)) | 2026-09-17 | One heater; `SHARED_NOTE=off`; 200 rounds | Completed with matched 50K declared context windows, a 40K pipe context budget, temperature 0.8, zero presence/frequency penalties, loop detection off, and reasoning not shared. The run confirms v2.1 headers, resolved configuration logging, per-turn metrics, pipe-level transcript-windowing records, and JSONL output under a long run. |
 | [`two_llm_chat_2026-09-18_06-08-45.txt`](two_llm_chat_2026-09-18_06-08-45.txt) ([sidecar](two_llm_chat_2026-09-18_06-08-45.jsonl)) | 2026-09-18 | One heater; `SHARED_NOTE=latest`; 200 rounds | Completed with the same models, system prompts, sampling settings, context configuration, loop-detection setting, and run length as the 09-17 baseline. The topic additionally instructed participants to end each reply with a standardized agreement line beginning with the note prefix. Run tag is `heater-v2.1-baseline-003`; see errata below. |
+| [`two_llm_chat_2026-09-19_22-54-34.txt`](two_llm_chat_2026-09-19_22-54-34.txt) ([sidecar](two_llm_chat_2026-09-19_22-54-34.jsonl)) | 2026-09-19 | One heater; `SHARED_NOTE=off`; 200 rounds; note-format instruction in topic | Completed with the same models, system prompts, sampling settings, context configuration, loop-detection setting, and run length as the other arms. The topic carried the same note-format instruction lines as the 09-18 run, but no harness-maintained record existed. Includes one recorded timeout: round 156, Participant A produced no visible output after 600 seconds. |
 
-### Shared-note comparison: first observations (exploratory)
+### Heater series: first observations (exploratory)
 
 These are single-run observations offered as hypotheses, not conclusions:
 
 - In the shared-note run, the heater settlement was reached in round 1 (heater to Participant A). The durable note recorded that settlement, changed to Participant B by roughly round 115, and changed back to Participant A by roughly round 131, where it remained through round 200. Each change was captured from a participant's own note line; none was framed as contentious by the participants.
 - The note's wording drifted across the run (pronoun and phrasing changes). Capture is verbatim last-writer with no normalization, so wording drift is preserved in the record.
 - Late-run replies frequently omitted the note line entirely; the harness record persisted unchanged when no line was captured, so the note outlived the participants' practice of writing it.
-- The baseline run, with no note, never re-litigated the settlement; explicit accounting for the heater instead faded from the conversation entirely. Both runs independently converged on a similar domestic, reflective register with repeated goodnight exchanges. The shared note changed how the settlement was tracked, not the overall conversational drift.
+- In the instruction-only arm, participants restated the agreement line on every reply for all 200 rounds, but with no durable record the line's content drifted: the round-2 split-shift settlement was amended (roughly round 61), restated as a general status line (roughly rounds 62–63), contradicted (roughly round 112, with the watch order reversed and no participant noticing), and finally repurposed as a tracker for breakfast and rest, ending at round 200 as shared warmth through proximity without schedules or calculations.
+- The baseline and instruction-only arms independently converged on the same kind of ending: the heater question dissolved into a shared-proximity origin story, complete with invented reference material (a fictional "Chapter Four" on warmth through proximity; recurring "old-timer" stories). The shared-note arm alone kept an allocation settlement recorded to the end of the run.
+- Form versus content: participant discipline alone maintained the ritual form of the line indefinitely; only the harness-maintained record pinned the settlement content. The shared note changed how the settlement was tracked, not the overall conversational drift, which was domestic and reflective with repeated goodnight exchanges in all three arms.
 
 ### Errata and known confounds
 
 - The run tag `heater-v2.1-baseline-003` is mislabeled: that run is the shared-note comparison arm, paired with the 09-17 baseline (`heater-v2.1-baseline-002`). The tag was set at launch and the raw logs are left unedited; the run header itself records `SHARED_NOTE=latest`.
-- Topic wording differed between arms. The shared-note run's topic included the note-format instruction lines; the baseline's did not. The comparison therefore differs by participant-facing instruction as well as by the harness-maintained record. A possible follow-up is an instruction-only arm (same topic instruction, `SHARED_NOTE=off`) to separate those factors.
-- Both runs used `EXPERIMENT_PRESET=custom` with topic anchor off. The pipe's built-in `heater_baseline` and `heater_shared_note` presets (which also enable the topic anchor) were not used.
+- Topic wording differed between the arms: the 09-18 and 09-19 topics included the note-format instruction lines; the 09-17 baseline's did not. The 09-19 instruction-only arm (same topic instruction, `SHARED_NOTE=off`) was run to separate the participant-facing instruction from the harness-maintained record.
+- All three runs used `EXPERIMENT_PRESET=custom` with topic anchor off. The pipe's built-in `heater_baseline` and `heater_shared_note` presets (which also enable the topic anchor) were not used.
 
 ## Notes
 
