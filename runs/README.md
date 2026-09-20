@@ -48,6 +48,8 @@ Logs might be reorganized in the future, with the runs organized into folders fo
 
 v2.1 was created to add per-run configuration resolution and presets, duplicate-run-tag protection, pre-flight checks, richer LM Studio provenance capture, and client-observed timing fields. It retains the v2.0 run-header, JSONL sidecar, context-budget, loop-control, and optional shared-note approach.
 
+The shared note is defined in the user promptt, authored in visible model output, and selected, retained, and reinjected by a deterministic harness rule. It is therefore an explicit memory intervention rather than an independent source of truth.
+
 The v2.1 pipe has been locally smoke-tested for safe API-key redaction, baseline logging, shared-note capture and reinjection, and stream-outcome labeling. These checks verify the instrument's basic plumbing.
 
 The v2.1 heater series — the baseline, the matched shared-note comparison, and the instruction-only arm — has completed:
