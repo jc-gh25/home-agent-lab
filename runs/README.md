@@ -63,17 +63,27 @@ v2.1 was created to add per-run configuration resolution and presets, duplicate-
 
 The v2.1 pipe has been locally smoke-tested for safe API-key redaction, baseline logging, shared-note capture and reinjection, and stream-outcome labeling. These checks verify the instrument's basic plumbing.
 
-The first v2.1 heater baseline has completed:
+The v2.1 heater baseline and the matched shared-note comparison run have both completed:
 
 | Files | Date | Topic / condition | Status |
 |---|---:|---|---|
 | [`two_llm_chat_2026-09-17_02-39-20.txt`](two_llm_chat_2026-09-17_02-39-20.txt) ([sidecar](two_llm_chat_2026-09-17_02-39-20.jsonl)) | 2026-09-17 | One heater; `SHARED_NOTE=off`; 200 rounds | Completed with matched 50K declared context windows, a 40K pipe context budget, temperature 0.8, zero presence/frequency penalties, loop detection off, and reasoning not shared. The run confirms v2.1 headers, resolved configuration logging, per-turn metrics, pipe-level transcript-windowing records, and JSONL output under a long run. |
+| [`two_llm_chat_2026-09-18_06-08-45.txt`](two_llm_chat_2026-09-18_06-08-45.txt) ([sidecar](two_llm_chat_2026-09-18_06-08-45.jsonl)) | 2026-09-18 | One heater; `SHARED_NOTE=latest`; 200 rounds | Completed with the same models, system prompts, sampling settings, context configuration, loop-detection setting, and run length as the 09-17 baseline. The topic additionally instructed participants to end each reply with a standardized agreement line beginning with the note prefix. Run tag is `heater-v2.1-baseline-003`; see errata below. |
 
-The next planned comparison condition is:
+### Shared-note comparison: first observations (exploratory)
 
-- **Shared note:** `SHARED_NOTE=latest`
+These are single-run observations offered as hypotheses, not conclusions:
 
-For a matched shared-note run, retain the same models, system prompts, topic wording, sampling settings, context configuration, loop-detection setting, token limits, and run length. The shared-note condition additionally needs a standardized agreement line beginning with the configured note prefix, normally `The arrangement, as agreed:`. In that condition, the harness retains the latest matching line and injects it before the windowed quoted transcript on later turns.
+- In the shared-note run, the heater settlement was reached in round 1 (heater to Participant A). The durable note recorded that settlement, changed to Participant B by roughly round 115, and changed back to Participant A by roughly round 131, where it remained through round 200. Each change was captured from a participant's own note line; none was framed as contentious by the participants.
+- The note's wording drifted across the run (pronoun and phrasing changes). Capture is verbatim last-writer with no normalization, so wording drift is preserved in the record.
+- Late-run replies frequently omitted the note line entirely; the harness record persisted unchanged when no line was captured, so the note outlived the participants' practice of writing it.
+- The baseline run, with no note, never re-litigated the settlement; explicit accounting for the heater instead faded from the conversation entirely. Both runs independently converged on a similar domestic, reflective register with repeated goodnight exchanges. The shared note changed how the settlement was tracked, not the overall conversational drift.
+
+### Errata and known confounds
+
+- The run tag `heater-v2.1-baseline-003` is mislabeled: that run is the shared-note comparison arm, paired with the 09-17 baseline (`heater-v2.1-baseline-002`). The tag was set at launch and the raw logs are left unedited; the run header itself records `SHARED_NOTE=latest`.
+- Topic wording differed between arms. The shared-note run's topic included the note-format instruction lines; the baseline's did not. The comparison therefore differs by participant-facing instruction as well as by the harness-maintained record. A possible follow-up is an instruction-only arm (same topic instruction, `SHARED_NOTE=off`) to separate those factors.
+- Both runs used `EXPERIMENT_PRESET=custom` with topic anchor off. The pipe's built-in `heater_baseline` and `heater_shared_note` presets (which also enable the topic anchor) were not used.
 
 ## Notes
 
