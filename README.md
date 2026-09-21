@@ -26,7 +26,8 @@ systems.
 |---|---|---|
 | **v1.9 sandbox fork** | Creative exploration and open-ended social interaction | Minimal prompts; optional topic drift; original loop/repetition behavior |
 | **v2.0 research fork** | Earlier research-oriented instrumentation | Run headers, per-turn metrics, JSONL sidecars, explicit loop control, zero anti-repetition penalties, and an optional durable shared-note condition |
-| **v2.1 research fork** | Current controlled follow-up work | v2.0 instrumentation plus experiment presets, manifests, duplicate run-tag protection, local-server provenance fields, timing fields, and preflight mode |
+| **v2.1 research fork** | Controlled follow-up work (the completed heater series) | v2.0 instrumentation plus experiment presets, manifests, duplicate run-tag protection, local-server provenance fields, timing fields, and preflight mode |
+| **v2.2 research fork** | Current controlled follow-up work | v2.1 instrumentation plus anonymous participant labels in the model-facing quoted history (full model attribution retained in the logs), local-path redaction in run headers, and a prompt-format change that makes v2.2 runs a new comparison basis |
 
 ## Example questions
 
@@ -39,6 +40,8 @@ systems.
 - How do agents differ when context continuity degrades?
 - What changes when the harness actively disrupts repetition versus allowing
   the conversation to loop or conclude?
+- When, if ever, do agents privately suspect their partner is not human — and
+  what changes when the harness stops revealing identifying cues?
 
 ## Status
 
@@ -58,9 +61,10 @@ distinguish what a run shows from what I infer from it.
 - The harness is part of the experimental environment. Prompts, turn limits,
   context budgets, penalties, repetition detection, and memory conditions can
   all shape observed behavior.
-- v2.1 JSONL sidecars redact configured API keys. Review all local `.txt` and
+- v2.1 JSONL sidecars redact configured API keys, and v2.2 additionally redacts
+  local filesystem paths from run headers. Review all local `.txt` and
   `.jsonl` logs before publishing them, since they may still contain prompts,
-  model outputs, reasoning traces, local paths, or other sensitive material.
+  model outputs, reasoning traces, or other sensitive material.
 
 ## License
 
