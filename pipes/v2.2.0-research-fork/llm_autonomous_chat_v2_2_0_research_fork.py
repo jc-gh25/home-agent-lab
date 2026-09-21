@@ -278,7 +278,7 @@ class Pipe:
         )
 
         # ------------------------------------------------------------------
-        # v2.1 EXPERIMENT CONTROL / REPRODUCIBILITY
+        # v2.2 EXPERIMENT CONTROL / REPRODUCIBILITY
         # ------------------------------------------------------------------
         EXPERIMENT_PRESET: str = Field(
             default="custom",
@@ -365,7 +365,7 @@ class Pipe:
     )
     LEGACY_REASONING_RE = re.compile(r"Working notes\s*\n\n(.*?)\n\n", re.DOTALL)
 
-    PIPE_VERSION = "2.1.0 (research fork)"
+    PIPE_VERSION = "2.2.0 (research fork)"
 
     def __init__(self):
         self.valves = self.Valves()
@@ -386,7 +386,7 @@ class Pipe:
         return [{"id": "two_llm_research", "name": "Two LLM Research"}]
 
     # ======================================================================
-    # v2.1 CONFIGURATION RESOLUTION, MANIFESTS, AND PROVENANCE
+    # v2.2 CONFIGURATION RESOLUTION, MANIFESTS, AND PROVENANCE
     # ======================================================================
 
     PRESET_PROFILES: Dict[str, Dict[str, Any]] = {
@@ -1154,7 +1154,7 @@ class Pipe:
     def _run_header_lines(
         self, original_prompt: str, is_continuation: bool
     ) -> List[str]:
-        """Every behavior-affecting valve plus v2.1 resolved/provenance data."""
+        """Every behavior-affecting valve plus v2.2 resolved/provenance data."""
         v = self.valves
         lines = [
             f"Pipe version: {self.PIPE_VERSION}",
