@@ -742,9 +742,7 @@ class Pipe:
             }
         return {
             "api_query_status": "captured" if api_data is not None else "unavailable",
-            "manual_metadata_path": (
-                os.path.basename(metadata_path) if metadata_path else None
-            ),
+            "manual_metadata_path": os.path.basename(manual_path),
             "models": models,
         }
 
