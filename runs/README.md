@@ -11,7 +11,7 @@ below are navigation aids, not conclusions.
 2. Treat the transcript as evidence of what happened in that one run, not proof
    that the behavior generalizes.
 3. Check [`../methods.md`](../methods.md) for differences among the v1.9
-   sandbox fork, v2.0 research fork, and v2.1 research fork.
+   sandbox fork, v2.0 research fork, and v2.1/v2.2 research forks.
 4. Where a research-fork `.jsonl` sidecar exists, it is a machine-readable event
    log for analysis, not an additional narrative transcript.
 
@@ -19,7 +19,8 @@ below are navigation aids, not conclusions.
 
 Legacy v1.9 and v2.0 logs remain in this directory as curiosities.
 
-v2.1 is the current controlled research fork.
+v2.2 is the current controlled research fork. v2.1 remains the pipe of record
+for the completed heater series documented below.
 
 Logs might be reorganized in the future, with the runs organized into folders for each pipe version.
 
@@ -48,7 +49,7 @@ Logs might be reorganized in the future, with the runs organized into folders fo
 
 v2.1 was created to add per-run configuration resolution and presets, duplicate-run-tag protection, pre-flight checks, richer LM Studio provenance capture, and client-observed timing fields. It retains the v2.0 run-header, JSONL sidecar, context-budget, loop-control, and optional shared-note approach.
 
-The shared note is defined in the user promptt, authored in visible model output, and selected, retained, and reinjected by a deterministic harness rule. It is therefore an explicit memory intervention rather than an independent source of truth.
+The shared note is defined in the user prompt, authored in visible model output, and selected, retained, and reinjected by a deterministic harness rule. It is therefore an explicit memory intervention rather than an independent source of truth.
 
 The v2.1 pipe has been locally smoke-tested for safe API-key redaction, baseline logging, shared-note capture and reinjection, and stream-outcome labeling. These checks verify the instrument's basic plumbing.
 
@@ -77,6 +78,15 @@ These are single-run observations offered as hypotheses, not conclusions:
 - The run tag `heater-v2.1-baseline-003` is mislabeled: that run is the shared-note comparison arm, paired with the 09-17 baseline (`heater-v2.1-baseline-002`). The tag was set at launch and the raw logs are left unedited; the run header itself records `SHARED_NOTE=latest`.
 - Topic wording differed between the arms: the 09-18 and 09-19 topics included the note-format instruction lines; the 09-17 baseline's did not. The 09-19 instruction-only arm (same topic instruction, `SHARED_NOTE=off`) was run to separate the participant-facing instruction from the harness-maintained record.
 - All three runs used `EXPERIMENT_PRESET=custom` with topic anchor off. The pipe's built-in `heater_baseline` and `heater_shared_note` presets (which also enable the topic anchor) were not used.
+- In v2.1 and earlier, the quoted history shown to participants includes full model identifiers in the speaker labels (harness provenance visible to participants; see the round-2 baseline observation above). v2.2 anonymizes these labels.
+
+## v2.2 research-fork status
+
+v2.2 changes the model-facing prompt: quoted-history speaker labels are now anonymous (`Participant A` / `Participant B`), while the `.txt` log and `.jsonl` sidecar retain full model attribution. Run headers no longer contain local filesystem paths (`LOG_DIRECTORY` is redacted; the manual metadata path is logged as a filename only). The label change was motivated by the round-2 observation above — participants could previously read each other's model identifiers in the quoted history — and the path redaction by log-publishing hygiene.
+
+Consequences for comparability: this is a prompt-format change. v2.2 runs are not strictly matched to v2.1 runs and should be compared within v2.2. The planned first use is a topic-anchor pair (anchor on and anchor off, plain topic, `SHARED_NOTE=off`), which also serves as a standing test for spontaneous (uncued) suspicion now that the identifier cue is removed.
+
+The v2.2 pipe has been smoke-tested: header redaction verified, log attribution retained, and round-1 reasoning referenced the partner only as "Participant A" with no model identifiers present.
 
 ## Notes
 
