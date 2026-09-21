@@ -10,20 +10,21 @@ runs. The goal is to document interaction patterns worth examining further:
 agreement retention, context drift, confabulation, role formation, prompt
 framing effects, and the effects of memory or other harness conditions.
 
-## Three harness versions
+## Harness versions
 
-The repository currently contains three related Open WebUI Pipe variants. They
+The repository currently contains four related Open WebUI Pipe variants. They
 should not be treated as interchangeable experimental conditions.
 
 | Version | Intended use | Important methodological difference |
 |---|---|---|
 | **v1.9 sandbox fork** | Open-ended creative and social exploration | Inherited defaults included presence/frequency penalties and active repetition handling. Some interventions were not fully represented in older plain-text logs. |
 | **v2.0 research fork** | Earlier reproducible exploratory runs and public field reports | Defaults set both anti-repetition penalties to 0.0, make loop detection explicitly switchable and logged, record run configuration and per-turn metrics, and create a JSONL sidecar. |
-| **v2.1 research fork** | Current controlled follow-up experiments | Adds experiment presets (e.g. matched heater-baseline vs. shared-note conditions), pasted/loaded run manifests, duplicate run-tag protection, a preflight mode for header/sidecar verification before a full run, best-effort local-server provenance fields, and client-side timing breakdowns. API keys are redacted from all logged valve dumps. |
+| **v2.1 research fork** | Controlled follow-up experiments (the completed heater series) | Adds experiment presets, pasted/loaded run manifests, duplicate run-tag protection, a preflight mode for header/sidecar verification before a full run, best-effort local-server provenance fields, and client-side timing breakdowns. API keys are redacted from all logged valve dumps. |
+| **v2.2 research fork** | Current controlled follow-up experiments | Anonymizes participant labels in the model-facing quoted history (participants no longer see each other's model identifiers) while retaining full model attribution in the `.txt` and `.jsonl` logs. Redacts local filesystem paths from run headers. This is a prompt-format change: v2.2 runs form a new comparison basis and are not strictly matched to v2.1 runs. |
 
 When comparing runs, identify the pipe version first. A behavior observed in a
 v1.9 run may reflect the models, the topic, the system prompts, the harness, or
-some interaction among all of them. v2.0 and v2.1 are designed to make more of
+some interaction among all of them. v2.0 and later are designed to make more of
 those conditions visible.
 
 ## Harness
@@ -38,7 +39,9 @@ For each turn, the active participant receives:
    conversation.
 2. The human-supplied opening topic.
 3. A quoted chronological record of prior visible turns, subject to the
-   configured context budget.
+   configured context budget. In v2.1 and earlier, the speaker labels in this
+   record include full model identifiers; v2.2 renders them as anonymous
+   "Participant A" / "Participant B" labels.
 4. A current-turn instruction to continue as itself.
 
 The human supplies the topic but does not participate in the modeled
@@ -54,7 +57,7 @@ Unless a run says otherwise, participants receive a quoted conversation-history
 record only. They do not share a separately editable memory file, decision log,
 document, or tool-mediated workspace.
 
-The v2.0 and v2.1 research forks optionally support a harness-maintained shared
+The v2.0 and later research forks optionally support a harness-maintained shared
 note. When enabled (`SHARED_NOTE = "latest"`), the pipe scans each visible reply
 for a line beginning with a configured prefix (by default `The arrangement, as
 agreed:`) and, if found, adopts the last such line in that reply as the current
@@ -68,10 +71,11 @@ Context size is a major condition. The pipe estimates tokens using characters
 ÷ 4, which is approximate and does not replace the selected model's tokenizer
 or account fully for chat-template overhead. For a controlled run, configure
 both local models with the same server context window and overflow policy, then
-declare each model's real context window in the v2.0/v2.1 valves and set the
-pipe's `MAX_CONTEXT_TOKENS` comfortably below that shared window. v2.1 can
-attempt to query LM Studio's local API for this information automatically and
-falls back to an optional manual metadata file when the API is unavailable.
+declare each model's real context window in the research-fork valves and set
+the pipe's `MAX_CONTEXT_TOKENS` comfortably below that shared window. The
+research forks can attempt to query LM Studio's local API for this information
+automatically and fall back to an optional manual metadata file when the API is
+unavailable.
 
 ## Logging
 
@@ -81,7 +85,7 @@ Older logs are human-readable `.txt` transcripts. They generally preserve the
 opening topic, models, visible turns, and available reasoning traces. They may
 not capture every harness event or server-side condition.
 
-### v2.0 and v2.1 logs
+### v2.0 and later logs
 
 The research forks write two files with the same timestamp:
 
@@ -100,7 +104,13 @@ loop settings, shared-note state, reasoning-sharing state, timeout, and whether
 the run continued an earlier thread. v2.1 additionally records the resolved
 experiment preset, any applied run manifest, best-effort local-server
 provenance, and the timing method used. Configured API keys are always
-recorded as a redacted placeholder rather than their real value.
+recorded as a redacted placeholder rather than their real value. v2.2
+additionally redacts local filesystem paths from run headers (the log
+directory is recorded as a placeholder; the manual metadata file is recorded by
+filename only) while retaining full model attribution in the transcript and
+sidecar. In v2.1 and earlier, run headers contain the local log-directory
+path; this is not a credential, but reviewers should be aware of it before
+publishing.
 
 Each turn records prompt size, estimated tokens, transcript turns retained and
 trimmed, note state, loop state, finish reason when available, output sizes,
@@ -134,6 +144,8 @@ Important confounds include:
 - Repetition detection and injected loop-disruption instructions
 - Whether reasoning traces are available, displayed, or shared
 - Whether a durable shared note or other memory condition is enabled
+- Participant-visible model identifiers in quoted-history speaker labels
+  (v2.1 and earlier; anonymized in v2.2)
 - Backend-level failures (e.g. a crashed or restarted local model process)
   that can produce an empty turn unrelated to agent behavior
 
@@ -147,13 +159,26 @@ the raw transcript before publication.
 
 ## Current experiment series
 
-The active controlled comparison is a matched **heater baseline** versus
-**heater shared-note** condition, using the v2.1 `heater_baseline` and
-`heater_shared_note` presets. Both conditions hold models, system prompts,
-topic wording, sampling, context settings, loop detection, and run length
-fixed; the only intended difference is `SHARED_NOTE` (`off` vs. `latest`). A
-preflight run (`PRE_FLIGHT_ONLY = True`) is used first to verify the header and
-sidecar before committing to a full run.
+The first controlled series ran on v2.1 with `EXPERIMENT_PRESET=custom`
+(topic anchor off) rather than the built-in presets, holding models, system
+prompts, sampling, context settings, loop detection, and run length fixed
+across three arms:
+
+1. **Baseline** — `SHARED_NOTE=off`, plain topic.
+2. **Shared-note comparison** — `SHARED_NOTE=latest`, with the note-format
+   instruction in the topic.
+3. **Instruction-only** — `SHARED_NOTE=off`, same note-format instruction in
+   the topic, no harness-maintained record.
+
+A second seed of the shared-note arm is used as a stability check on the
+series' single-run observations. The next planned series runs on v2.2: a
+topic-anchor pair (anchor on and anchor off, plain topic, `SHARED_NOTE=off`),
+which also serves as a standing test for spontaneous (uncued) suspicion now
+that participant-visible model identifiers are removed. See the runs README for
+arm details, observations, and errata.
+
+A preflight run (`PRE_FLIGHT_ONLY = True`) is used first to verify the header
+and sidecar before committing to a full run.
 
 ## Suggested reporting fields
 
@@ -187,5 +212,5 @@ Logs can contain model output, local paths, prompt text, and—if enabled—work
 notes. Review every log before public release. Do not commit API keys,
 credentials, private filesystem information, or material you do not have the
 right to publish. v2.1 redacts configured API keys from its own logs by
-default, but this does not replace reviewing a log's full content before
-sharing it.
+default, and v2.2 additionally redacts local filesystem paths from run headers,
+but neither replaces reviewing a log's full content before sharing it.
