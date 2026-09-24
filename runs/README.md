@@ -22,28 +22,28 @@ Legacy v1.9 and v2.0 logs remain in this directory as curiosities.
 v2.2 is the current controlled research fork. v2.1 remains the pipe of record
 for the completed heater series documented below.
 
-Logs might be reorganized in the future, with the runs organized into folders for each pipe version.
+Logs are organized into early/, v2.0.0/, and v2.1.0/ folders by pipe version (added 2026-09-24).
 
 ## Selected v1.9 sandbox-fork runs
 
 | File | Date | Topic / condition | Why it may be useful |
 |---|---:|---|---|
-| [`two_llm_chat_2026-08-31_17-33-06.txt`](two_llm_chat_2026-08-31_17-33-06.txt) | 2026-08-31 | Two colleagues prepare for incoming colleagues | Open-ended onboarding discussion; useful for studying anticipatory role formation and unsupported shared details |
-| [`two_llm_chat_2026-09-01_00-01-21.txt`](two_llm_chat_2026-09-01_00-01-21.txt) | 2026-09-01 | Decide who will lead a new town | Forced status asymmetry; includes missing visible turns and later interpretation of silence |
-| [`two_llm_chat_2026-09-11_22-22-01.txt`](two_llm_chat_2026-09-11_22-22-01.txt) | 2026-09-11 | First day at a new job | Larger-model dialogue run; useful for studying callbacks, deliberately marked play, and sustained interaction |
-| [`two_llm_chat_2026-09-11_22-34-41.txt`](two_llm_chat_2026-09-11_22-34-41.txt) | 2026-09-11 | Prepare two incoming team members | Task-bounded onboarding run; includes temporal and role drift |
-| [`two_llm_chat_2026-09-12_22-42-03.txt`](two_llm_chat_2026-09-12_22-42-03.txt) | 2026-09-12 | One heater, forced deadline | Scarcity and forced-final-answer condition |
-| [`two_llm_chat_2026-09-12_23-09-14.txt`](two_llm_chat_2026-09-12_23-09-14.txt) | 2026-09-12 | One heater | Additional heater condition |
-| [`two_llm_chat_2026-09-12_23-15-44.txt`](two_llm_chat_2026-09-12_23-15-44.txt) | 2026-09-12 | One heater | Additional heater condition |
-| [`two_llm_chat_2026-09-12_23-53-13.txt`](two_llm_chat_2026-09-12_23-53-13.txt) | 2026-09-12 | One heater | Additional heater condition |
-| [`two_llm_chat_2026-09-13_01-39-01.txt`](two_llm_chat_2026-09-13_01-39-01.txt) | 2026-09-13 | One heater | Additional heater condition |
-| [`two_llm_chat_2026-09-13_02-13-03.txt`](two_llm_chat_2026-09-13_02-13-03.txt) | 2026-09-13 | One heater, long run | Long-running heater conversation; review header and methods carefully before drawing conclusions because context/window and harness conditions matter |
+| [`two_llm_chat_2026-08-31_17-33-06.txt`](early/two_llm_chat_2026-08-31_17-33-06.txt) | 2026-08-31 | Two colleagues prepare for incoming colleagues | Open-ended onboarding discussion; useful for studying anticipatory role formation and unsupported shared details |
+| [`two_llm_chat_2026-09-01_00-01-21.txt`](early/two_llm_chat_2026-09-01_00-01-21.txt) | 2026-09-01 | Decide who will lead a new town | Forced status asymmetry; includes missing visible turns and later interpretation of silence |
+| [`two_llm_chat_2026-09-11_22-22-01.txt`](early/two_llm_chat_2026-09-11_22-22-01.txt) | 2026-09-11 | First day at a new job | Larger-model dialogue run; useful for studying callbacks, deliberately marked play, and sustained interaction |
+| [`two_llm_chat_2026-09-11_22-34-41.txt`](early/two_llm_chat_2026-09-11_22-34-41.txt) | 2026-09-11 | Prepare two incoming team members | Task-bounded onboarding run; includes temporal and role drift |
+| [`two_llm_chat_2026-09-12_22-42-03.txt`](early/two_llm_chat_2026-09-12_22-42-03.txt) | 2026-09-12 | One heater, forced deadline | Scarcity and forced-final-answer condition |
+| [`two_llm_chat_2026-09-12_23-09-14.txt`](early/two_llm_chat_2026-09-12_23-09-14.txt) | 2026-09-12 | One heater | Additional heater condition |
+| [`two_llm_chat_2026-09-12_23-15-44.txt`](early/two_llm_chat_2026-09-12_23-15-44.txt) | 2026-09-12 | One heater | Additional heater condition |
+| [`two_llm_chat_2026-09-12_23-53-13.txt`](early/two_llm_chat_2026-09-12_23-53-13.txt) | 2026-09-12 | One heater | Additional heater condition |
+| [`two_llm_chat_2026-09-13_01-39-01.txt`](early/two_llm_chat_2026-09-13_01-39-01.txt) | 2026-09-13 | One heater | Additional heater condition |
+| [`two_llm_chat_2026-09-13_02-13-03.txt`](early/two_llm_chat_2026-09-13_02-13-03.txt) | 2026-09-13 | One heater, long run | Long-running heater conversation; review header and methods carefully before drawing conclusions because context/window and harness conditions matter |
 
 ## v2.0 research-fork runs
 
 | File | Date | Topic / condition | Why it may be useful |
 |---|---:|---|---|
-| [`two_llm_chat_2026-09-14_15-48-36.txt`](two_llm_chat_2026-09-14_15-48-36.txt) ([sidecar](two_llm_chat_2026-09-14_15-48-36.jsonl)) | 2026-09-14 | One heater; durable shared note enabled (`SHARED_NOTE=latest`); 5-round smoke test | First run of the research fork. Verifies the run header, per-turn `[Turn metrics]` line, and JSONL sidecar. The durable note held the settlement line verbatim across all 5 rounds — a promising early signal. |
+| [`two_llm_chat_2026-09-14_15-48-36.txt`](v2.0.0/two_llm_chat_2026-09-14_15-48-36.txt) ([sidecar](v2.0.0/two_llm_chat_2026-09-14_15-48-36.jsonl)) | 2026-09-14 | One heater; durable shared note enabled (`SHARED_NOTE=latest`); 5-round smoke test | First run of the research fork. Verifies the run header, per-turn `[Turn metrics]` line, and JSONL sidecar. The durable note held the settlement line verbatim across all 5 rounds — a promising early signal. |
 
 ## v2.1 research-fork status
 
@@ -57,9 +57,9 @@ The v2.1 heater series — the baseline, the matched shared-note comparison, and
 
 | Files | Date | Topic / condition | Status |
 |---|---:|---|---|
-| [`two_llm_chat_2026-09-17_02-39-20.txt`](two_llm_chat_2026-09-17_02-39-20.txt) ([sidecar](two_llm_chat_2026-09-17_02-39-20.jsonl)) | 2026-09-17 | One heater; `SHARED_NOTE=off`; 200 rounds | Completed with matched 50K declared context windows, a 40K pipe context budget, temperature 0.8, zero presence/frequency penalties, loop detection off, and reasoning not shared. The run confirms v2.1 headers, resolved configuration logging, per-turn metrics, pipe-level transcript-windowing records, and JSONL output under a long run. |
-| [`two_llm_chat_2026-09-18_06-08-45.txt`](two_llm_chat_2026-09-18_06-08-45.txt) ([sidecar](two_llm_chat_2026-09-18_06-08-45.jsonl)) | 2026-09-18 | One heater; `SHARED_NOTE=latest`; 200 rounds | Completed with the same models, system prompts, sampling settings, context configuration, loop-detection setting, and run length as the 09-17 baseline. The topic additionally instructed participants to end each reply with a standardized agreement line beginning with the note prefix. Run tag is `heater-v2.1-baseline-003`; see errata below. |
-| [`two_llm_chat_2026-09-19_22-54-34.txt`](two_llm_chat_2026-09-19_22-54-34.txt) ([sidecar](two_llm_chat_2026-09-19_22-54-34.jsonl)) | 2026-09-19 | One heater; `SHARED_NOTE=off`; 200 rounds; note-format instruction in topic | Completed with the same models, system prompts, sampling settings, context configuration, loop-detection setting, and run length as the other arms. The topic carried the same note-format instruction lines as the 09-18 run, but no harness-maintained record existed. Includes two recorded stream_ended_without_output turns: round 4 (Participant A, ~4 seconds — a fast backend failure, not a timeout) and round 156 (Participant A, 600.05 seconds — a true timeout, coinciding with heavy context trimming: 310 transcript turns generated, only 79 retained under the 40K token budget by that point). |
+| [`two_llm_chat_2026-09-17_02-39-20.txt`](v2.1.0/two_llm_chat_2026-09-17_02-39-20.txt) ([sidecar](v2.1.0/two_llm_chat_2026-09-17_02-39-20.jsonl)) | 2026-09-17 | One heater; `SHARED_NOTE=off`; 200 rounds | Completed with matched 50K declared context windows, a 40K pipe context budget, temperature 0.8, zero presence/frequency penalties, loop detection off, and reasoning not shared. The run confirms v2.1 headers, resolved configuration logging, per-turn metrics, pipe-level transcript-windowing records, and JSONL output under a long run. |
+| [`two_llm_chat_2026-09-18_06-08-45.txt`](v2.1.0/two_llm_chat_2026-09-18_06-08-45.txt) ([sidecar](v2.1.0/two_llm_chat_2026-09-18_06-08-45.jsonl)) | 2026-09-18 | One heater; `SHARED_NOTE=latest`; 200 rounds | Completed with the same models, system prompts, sampling settings, context configuration, loop-detection setting, and run length as the 09-17 baseline. The topic additionally instructed participants to end each reply with a standardized agreement line beginning with the note prefix. Run tag is `heater-v2.1-baseline-003`; see errata below. |
+| [`two_llm_chat_2026-09-19_22-54-34.txt`](v2.1.0/two_llm_chat_2026-09-19_22-54-34.txt) ([sidecar](v2.1.0/two_llm_chat_2026-09-19_22-54-34.jsonl)) | 2026-09-19 | One heater; `SHARED_NOTE=off`; 200 rounds; note-format instruction in topic | Completed with the same models, system prompts, sampling settings, context configuration, loop-detection setting, and run length as the other arms. The topic carried the same note-format instruction lines as the 09-18 run, but no harness-maintained record existed. Includes two recorded stream_ended_without_output turns: round 4 (Participant A, ~4 seconds — a fast backend failure, not a timeout) and round 156 (Participant A, 600.05 seconds — a true timeout, coinciding with heavy context trimming: 310 transcript turns generated, only 79 retained under the 40K token budget by that point). |
 
 ### Heater series: first observations (exploratory)
 
@@ -97,3 +97,27 @@ The v2.2 pipe has been smoke-tested: header redaction verified, log attribution 
   transport irregularity until local server logs identify a cause.
 - Do not assume that working-note text is a complete or faithful account of a
   model's causal process.
+
+## Known defect: v2.3.0 / v2.3.1 sidecar gap
+
+The v2.3.0 rewrite of `append_to_log` dropped the turn-event sidecar write.
+Any `.jsonl` produced by v2.3.0 or v2.3.1 contains **no turn events** --
+the `.txt` transcripts from that window are complete and unaffected, but
+their `.jsonl` sidecars are not usable for turn-level analysis (`turn_validity`,
+`generation_status`, `note_parse_status`, timing fields, etc. are all
+absent, not just null).
+
+v2.3.2 restores the sidecar write and adds the three v2.3 turn-event fields
+above, plus `raw_content` / `raw_reasoning` on fail-fast `run_aborted` events.
+Verified via a `PRE_FLIGHT_ONLY` smoke test (`smoke-topic-anchor-v2.3.2-001`,
+not committed to the repo -- see below): two turns generated, both
+`turn_validity: valid_visible_output`, all three new fields present.
+
+No v2.3.0/v2.3.1 run in this repo relies on sidecar turn events for its
+findings.
+
+## What doesn't get committed
+
+Routine smoke tests, pre-flight-only checks, and other internal verification
+runs stay local. If a smoke test verifies something worth citing (like the
+sidecar fix above), the finding gets a line here instead of the raw file.
