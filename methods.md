@@ -12,7 +12,7 @@ framing effects, and the effects of memory or other harness conditions.
 
 ## Harness versions
 
-The repository currently contains four related Open WebUI Pipe variants. They
+The repository currently contains seven related Open WebUI Pipe variants (the table groups the v2.3.0–v2.3.2 patch series into one row). They
 should not be treated as interchangeable experimental conditions.
 
 | Version | Intended use | Important methodological difference |
@@ -21,6 +21,7 @@ should not be treated as interchangeable experimental conditions.
 | **v2.0 research fork** | Earlier reproducible exploratory runs and public field reports | Defaults set both anti-repetition penalties to 0.0, make loop detection explicitly switchable and logged, record run configuration and per-turn metrics, and create a JSONL sidecar. |
 | **v2.1 research fork** | Controlled follow-up experiments (the completed heater series) | Adds experiment presets, pasted/loaded run manifests, duplicate run-tag protection, a preflight mode for header/sidecar verification before a full run, best-effort local-server provenance fields, and client-side timing breakdowns. API keys are redacted from all logged valve dumps. |
 | **v2.2 research fork** | Current controlled follow-up experiments | Anonymizes participant labels in the model-facing quoted history (participants no longer see each other's model identifiers) while retaining full model attribution in the `.txt` and `.jsonl` logs. Redacts local filesystem paths from run headers. This is a prompt-format change: v2.2 runs form a new comparison basis and are not strictly matched to v2.1 runs. |
+| **v2.3 research fork** | Pre-launch hardening for the v2.2 anchor-pair plan (v2.3.0–v2.3.2) | Adds startup model preflight (`model_preflight` sidecar events), fail-fast abort on invalid visible turns with raw content/reasoning capture on abort, and per-turn `turn_validity` / `generation_status` / `note_parse_status` fields. A v2.3.0 regression briefly dropped turn-event sidecar writes; v2.3.2 restored them and is the version the anchor pair actually runs on. The turn-instruction wording change makes v2.3 runs a new comparison basis, not strictly matched to v2.2 runs. |
 
 When comparing runs, identify the pipe version first. A behavior observed in a
 v1.9 run may reflect the models, the topic, the system prompts, the harness, or
@@ -122,6 +123,17 @@ disengagement. When this occurs, check the local inference server's own logs
 for the underlying cause; the pipe can only report what the API response
 contained, not internal server-side errors that never reach it.
 
+v2.3 logs `model_preflight` sidecar events for the startup probes; these
+are diagnostic, not experimental data, and should not be included in outcome
+analysis. Each v2.3 turn event also carries `turn_validity`,
+`generation_status`, and `note_parse_status` fields, and v2.3 introduces
+`FAIL_FAST_ON_INVALID_VISIBLE_TURN`: when enabled, a turn with no visible
+output ends the run immediately rather than continuing with a gap, and the
+resulting `run_aborted` event records the model's full `raw_content` and
+`raw_reasoning` for diagnosis. This is a harness setting, not a fixed
+behavior — whether an invalid turn halts a run or is logged and passed over
+is itself part of the run's recorded condition and should be checked per run.
+
 ## Interpretation and limits
 
 These are exploratory observations from particular local models, quantizations,
@@ -148,6 +160,8 @@ Important confounds include:
   (v2.1 and earlier; anonymized in v2.2)
 - Backend-level failures (e.g. a crashed or restarted local model process)
   that can produce an empty turn unrelated to agent behavior
+- Whether the harness halts on an invalid visible turn or continues past it
+  (v2.3+, controlled by `FAIL_FAST_ON_INVALID_VISIBLE_TURN`)
 
 Working-note or reasoning traces are recorded when the backend supplies them.
 They are not assumed to be transparent evidence of a model's internal
@@ -171,11 +185,11 @@ across three arms:
    the topic, no harness-maintained record.
 
 A second seed of the shared-note arm is used as a stability check on the
-series' single-run observations. The next planned series runs on v2.2: a
-topic-anchor pair (anchor on and anchor off, plain topic, `SHARED_NOTE=off`),
-which also serves as a standing test for spontaneous (uncued) suspicion now
-that participant-visible model identifiers are removed. See the runs README for
-arm details, observations, and errata.
+series' single-run observations. The next planned series is a topic-anchor pair (anchor on and anchor off,
+plain topic, `SHARED_NOTE=off`), which also serves as a standing test for
+spontaneous (uncued) suspicion now that participant-visible model
+identifiers are removed. It runs on v2.3.2 rather than v2.2 directly; see
+"Harness versions" above and the runs README for why.
 
 A preflight run (`PRE_FLIGHT_ONLY = True`) is used first to verify the header
 and sidecar before committing to a full run.
