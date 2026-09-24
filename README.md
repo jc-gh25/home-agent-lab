@@ -28,6 +28,7 @@ systems.
 | **v2.0 research fork** | Earlier research-oriented instrumentation | Run headers, per-turn metrics, JSONL sidecars, explicit loop control, zero anti-repetition penalties, and an optional durable shared-note condition |
 | **v2.1 research fork** | Controlled follow-up work (the completed heater series) | v2.0 instrumentation plus experiment presets, manifests, duplicate run-tag protection, local-server provenance fields, timing fields, and preflight mode |
 | **v2.2 research fork** | Current controlled follow-up work | v2.1 instrumentation plus anonymous participant labels in the model-facing quoted history (full model attribution retained in the logs), local-path redaction in run headers, and a prompt-format change that makes v2.2 runs a new comparison basis |
+| **v2.3 research fork** | Pre-launch hardening for the v2.2 anchor-pair plan | v2.2 instrumentation plus startup model preflight, fail-fast abort on invalid visible turns, per-turn `turn_validity` / `generation_status` / `note_parse_status` fields, model-ID preflight diagnostics, and the v2.3.2 restoration of the dropped turn-event sidecar writes; the turn-instruction wording change makes v2.3 runs a new comparison basis |
 
 ## Example questions
 

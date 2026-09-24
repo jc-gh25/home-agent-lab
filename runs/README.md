@@ -17,9 +17,9 @@ below are navigation aids, not conclusions.
 
 ## Folder layout
 
-Legacy v1.9 and v2.0 logs remain in this directory as curiosities.
+Legacy v1.9 logs are in `early/`; the v2.0 first run is in `v2.0.0/`.
 
-v2.2 is the current controlled research fork. v2.1 remains the pipe of record
+v2.3.2 is the current controlled research fork. v2.1 remains the pipe of record
 for the completed heater series documented below.
 
 Logs are organized into early/, v2.0.0/, and v2.1.0/ folders by pipe version (added 2026-09-24).
@@ -87,6 +87,24 @@ v2.2 changes the model-facing prompt: quoted-history speaker labels are now anon
 Consequences for comparability: this is a prompt-format change. v2.2 runs are not strictly matched to v2.1 runs and should be compared within v2.2. The planned first use is a topic-anchor pair (anchor on and anchor off, plain topic, `SHARED_NOTE=off`), which also serves as a standing test for spontaneous (uncued) suspicion now that the identifier cue is removed.
 
 The v2.2 pipe has been smoke-tested: header redaction verified, log attribution retained, and round-1 reasoning referenced the partner only as "Participant A" with no model identifiers present.
+
+## v2.3 research-fork status
+
+v2.2's planned topic-anchor pair (anchor on and anchor off, plain topic,
+`SHARED_NOTE=off`) was not launched directly on v2.2. Before that run,
+additional pre-launch safety instrumentation was added: v2.3.0 introduced
+startup model preflight and fail-fast abort on invalid visible turns, and
+v2.3.1 added clearer preflight diagnostics for when LM Studio rejects a stale
+configured model identifier.
+
+While smoke-testing before launch, v2.3.0's rewrite of the logging function
+was found to have silently dropped the turn-event sidecar write (see "Known
+defect: v2.3.0 / v2.3.1 sidecar gap" below). v2.3.2 restored it and is the
+version the anchor pair actually runs on. v2.2 itself produced no experimental
+run of its own beyond its smoke test.
+
+The anchor pair is in progress as of this writing; results will be added here
+once both arms complete.
 
 ## Notes
 
