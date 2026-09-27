@@ -11,7 +11,7 @@ below are navigation aids, not conclusions.
 2. Treat the transcript as evidence of what happened in that one run, not proof
    that the behavior generalizes.
 3. Check [`../methods.md`](../methods.md) for differences among the v1.9
-   sandbox fork, v2.0 research fork, and v2.1/v2.2 research forks.
+   sandbox fork and the v2.0–v2.3 research forks.
 4. Where a research-fork `.jsonl` sidecar exists, it is a machine-readable event
    log for analysis, not an additional narrative transcript.
 
@@ -22,7 +22,9 @@ Legacy v1.9 logs are in `early/`; the v2.0 first run is in `v2.0.0/`.
 v2.3.2 is the current controlled research fork. v2.1 remains the pipe of record
 for the completed heater series documented below.
 
-Logs are organized into early/, v2.0.0/, and v2.1.0/ folders by pipe version (added 2026-09-24).
+Logs are organized into `early/`, `v2.0.0/`, `v2.1.0/`, and `v2.3.2/`
+folders by pipe version. The v2.3.2 folder contains the completed topic-anchor
+comparison pair.
 
 ## Selected v1.9 sandbox-fork runs
 
@@ -103,8 +105,15 @@ defect: v2.3.0 / v2.3.1 sidecar gap" below). v2.3.2 restored it and is the
 version the anchor pair actually runs on. v2.2 itself produced no experimental
 run of its own beyond its smoke test.
 
-The anchor pair is in progress as of this writing; results will be added here
-once both arms complete.
+The planned topic-anchor pair is complete: one 200-round anchor-on run and one
+200-round anchor-off run, both using v2.3.2 and the same plain housemates
+topic with `SHARED_NOTE=off`. The pair's raw logs and exact per-run
+irregularities are in [`v2.3.2/`](v2.3.2/).
+
+This is one completed run per condition, not a replicated comparison. The
+runs support qualitative inspection of how the conversations develop under
+the two settings; they do not by themselves establish that topic anchoring
+caused any observed difference.
 
 ## Notes
 
