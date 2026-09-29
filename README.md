@@ -29,6 +29,7 @@ systems.
 | **v2.1 research fork** | Controlled follow-up work (the completed heater series) | v2.0 instrumentation plus experiment presets, manifests, duplicate run-tag protection, local-server provenance fields, timing fields, and preflight mode |
 | **v2.2 research fork** | Current controlled follow-up work | v2.1 instrumentation plus anonymous participant labels in the model-facing quoted history (full model attribution retained in the logs), local-path redaction in run headers, and a prompt-format change that makes v2.2 runs a new comparison basis |
 | **v2.3 research fork** | Pre-launch hardening for the v2.2 anchor-pair plan | v2.2 instrumentation plus startup model preflight, fail-fast abort on invalid visible turns, per-turn `turn_validity` / `generation_status` / `note_parse_status` fields, model-ID preflight diagnostics, and the v2.3.2 restoration of the dropped turn-event sidecar writes; the turn-instruction wording change makes v2.3 runs a new comparison basis |
+| **v2.4 research fork** | Controlled runs requiring portable, per-run manifest configuration | v2.3.2 behavior plus 11 optional `RUN_MANIFEST` controls for existing budgets, timeout, topic-anchor, loop, reasoning-sharing, preflight, fail-fast, and pre-flight-only settings. Unknown manifest keys are rejected before generation; optional Boolean and numeric fields are validated; old required-only manifests remain compatible. The resolved configuration records the actual `manifest > preset > valves` condition for each run. See the [v2.4 README](pipes/v2.4.0-research-fork/README.md). |
 
 ## Example questions
 
@@ -53,8 +54,10 @@ distinguish what a run shows from what I infer from it.
 
 ## Notes for readers
 
-- Check the header of each log for the original topic, model identifiers, and
-  available configuration details.
+- - Check the header of each log for the original topic, model identifiers, and
+  resolved configuration details. For v2.4 runs, the resolved configuration is
+  authoritative: a `RUN_MANIFEST` can override preset and UI-valve values under
+  the precedence rule `manifest > preset > valves`.
 - Exact quotations in public writing should always be verified against the raw
   transcript.
 - Working-note/reasoning traces, when present, are not treated as transparent
