@@ -169,13 +169,9 @@ For clarity and reproducibility, put the complete experimental instruction in th
 
 ### Does block placement matter?
 
-The fenced manifest block may appear before or after ordinary text in the initial user message. The pipe searches the whole initial message for:
-
-```text
-```RUN_MANIFEST
-...
-```
-```
+The pipe searches the whole initial message for a fenced block beginning with
+three backticks immediately followed by `RUN_MANIFEST`, followed by JSON, and
+ending with three backticks.
 
 For least ambiguity, use one initial user message containing:
 
@@ -188,10 +184,11 @@ Do not include more than one `RUN_MANIFEST` block in one initial user message.
 ### File-based manifest alternative
 
 For a file-based manifest, the pipe can also look for:
-
+````
 ```text
 manifest_<RUN_TAG>.json
 ```
+````
 
 inside `LOG_DIRECTORY`, but only when no fenced `RUN_MANIFEST` block appears in the initial user prompt and the `RUN_TAG` valve is already set in Open WebUI.
 
@@ -248,17 +245,17 @@ Replace `your-exact-model-a-id` and `your-exact-model-b-id` with the exact ident
 In some LM Studio setups, models are loaded on demand instead of being ready before the first request.
 
 `MODEL_PREFLIGHT` sends isolated probe requests before the conversation begins. If the server rejects those probes while a requested model is still loading, set:
-
+````
 ```json
 "model_preflight": false
 ```
-
+````
 Then use:
-
+````
 ```json
 "pre_flight_only": true
 ```
-
+````
 to run one real A/B round as a live connectivity, header, and logging check.
 
 This behavior does not mean manifest model selection failed. Confirm model selection by checking the resolved configuration and the displayed Participant A/B model identifiers.
@@ -268,18 +265,18 @@ This behavior does not mean manifest model selection failed. Confirm model selec
 When `LOG_TO_FILE` is enabled, set a writable `LOG_DIRECTORY` in the Open WebUI pipe valves. An empty log directory is not valid.
 
 For test runs, set:
-
+````
 ```text
 SHOW_LOG_PATH = true
 ```
-
+````
 The pipe writes:
-
+````
 ```text
 two_llm_chat_<timestamp>.txt
 two_llm_chat_<timestamp>.jsonl
 ```
-
+````
 The human-readable `.txt` log includes the pipe version, resolved configuration, manifest-applied status, and run header.
 
 The `.jsonl` sidecar includes a `run_start` event containing:
