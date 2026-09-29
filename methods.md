@@ -12,8 +12,8 @@ framing effects, and the effects of memory or other harness conditions.
 
 ## Harness versions
 
-The repository currently contains seven related Open WebUI Pipe variants (the table groups the v2.3.0–v2.3.2 patch series into one row). They
-should not be treated as interchangeable experimental conditions.
+The repository currently contains eight related Open WebUI Pipe variants (the table groups the v2.3.0–v2.3.2 patch series into one row). 
+They should not be treated as interchangeable experimental conditions.
 
 | Version | Intended use | Important methodological difference |
 |---|---|---|
@@ -22,6 +22,7 @@ should not be treated as interchangeable experimental conditions.
 | **v2.1 research fork** | Controlled follow-up experiments (the completed heater series) | Adds experiment presets, pasted/loaded run manifests, duplicate run-tag protection, a preflight mode for header/sidecar verification before a full run, best-effort local-server provenance fields, and client-side timing breakdowns. API keys are redacted from all logged valve dumps. |
 | **v2.2 research fork** | Current controlled follow-up experiments | Anonymizes participant labels in the model-facing quoted history (participants no longer see each other's model identifiers) while retaining full model attribution in the `.txt` and `.jsonl` logs. Redacts local filesystem paths from run headers. This is a prompt-format change: v2.2 runs form a new comparison basis and are not strictly matched to v2.1 runs. |
 | **v2.3 research fork** | Pre-launch hardening for the v2.2 anchor-pair plan (v2.3.0–v2.3.2) | Adds startup model preflight (`model_preflight` sidecar events), fail-fast abort on invalid visible turns with raw content/reasoning capture on abort, and per-turn `turn_validity` / `generation_status` / `note_parse_status` fields. A v2.3.0 regression briefly dropped turn-event sidecar writes; v2.3.2 restored them and is the version the anchor pair actually runs on. The turn-instruction wording change makes v2.3 runs a new comparison basis, not strictly matched to v2.2 runs. |
+| **v2.4 research fork** | Controlled runs requiring per-run manifest-specified parameter conditions | Extends `RUN_MANIFEST` with 11 optional controls for existing budget, timeout, topic-anchor, loop, reasoning-sharing, preflight, fail-fast, and pre-flight-only valves. Unknown manifest keys are rejected before generation; optional Boolean values must be actual JSON `true` or `false`; optional numeric values are range-validated. Required-only v2.3.2 manifests remain compatible. The manifest, preset, and UI-valve precedence remains `manifest > preset > valves`. v2.4 does not change participant prompts, turn order, transcript format, or default valve values. |
 
 When comparing runs, identify the pipe version first. A behavior observed in a
 v1.9 run may reflect the models, the topic, the system prompts, the harness, or
@@ -134,6 +135,25 @@ resulting `run_aborted` event records the model's full `raw_content` and
 behavior — whether an invalid turn halts a run or is logged and passed over
 is itself part of the run's recorded condition and should be checked per run.
 
+v2.4 extends the manifest-derived portion of the recorded configuration.
+Its `resolved_values` record includes the 11 newly manifest-addressable
+controls: `MAX_TOKENS`, `MAX_ORIGINAL_PROMPT_TOKENS`, `TIMEOUT_SECONDS`,
+`TOPIC_ANCHOR`, `LOOP_DETECTION`, `REPETITION_LOOKBACK`,
+`REPETITION_THRESHOLD`, `SHARE_REASONING`, `MODEL_PREFLIGHT`,
+`FAIL_FAST_ON_INVALID_VISIBLE_TURN`, and `PRE_FLIGHT_ONLY`. The text header
+and the JSONL `run_start` event preserve the resolved configuration and raw
+manifest text. These controls are experimental conditions: when a manifest
+sets one, analyses and public reporting should treat that resolved value—not
+merely the corresponding UI-valve default—as the condition that was run.
+
+For LM Studio configurations that load models only on the first normal
+generation request, the automatic `MODEL_PREFLIGHT` probe may be rejected
+before the requested model is available. In that operational configuration,
+a run may deliberately set `model_preflight` to `false` and use
+`pre_flight_only` for a one-round live verification run. This is an
+environmental/harness condition that should be retained in the resolved
+configuration and reported with the run.
+
 ## Interpretation and limits
 
 These are exploratory observations from particular local models, quantizations,
@@ -209,6 +229,15 @@ SERVER CONTEXT WINDOW AND OVERFLOW POLICY:
 OPENING TOPIC:
 SYSTEM PROMPT A / B:
 TEMPERATURE / PENALTIES:
+RUN MANIFEST USED (RAW OR LINK):
+RESOLVED CONFIGURATION (RAW OR LINK):
+MAX ORIGINAL PROMPT TOKENS:
+TIMEOUT SECONDS:
+PRE-FLIGHT ONLY:
+MODEL PREFLIGHT:
+FAIL-FAST ON INVALID VISIBLE TURN:
+REPETITION LOOKBACK / THRESHOLD:
+REASONING SHARING:
 TOPIC ANCHOR:
 LOOP DETECTION:
 SHARED NOTE MODE:
@@ -216,7 +245,7 @@ MAX TOKENS:
 MAX CONTEXT TOKENS:
 REQUESTED ROUNDS:
 STOP CONDITION:
-KNOWN IRREGULARITIES (including any stream_ended_without_output turns):
+KNOWN IRREGULARITIES (including any stream_ended_without_output, preflight, or invalid-visible-turn events):
 RAW LOG LINKS (.txt and .jsonl when applicable):
 ```
 
