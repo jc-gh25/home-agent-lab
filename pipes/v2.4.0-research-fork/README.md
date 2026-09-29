@@ -132,6 +132,78 @@ Leave `API_KEY` blank only when:
 
 Never put API keys in `RUN_MANIFEST`, chat prompts, logs intended for sharing, or the repository.
 
+## Where to put the manifest
+
+The recommended method is to paste the `RUN_MANIFEST` JSON directly into the **initial user message** in Open WebUI.
+
+It is not a file to place in `LOG_DIRECTORY`, and it is not the same thing as `lmstudio_manual_metadata.json`.
+
+Use this structure:
+
+````text
+Your ordinary user instruction or question can appear here.
+
+```RUN_MANIFEST
+{
+  "run_tag": "example-run-001",
+  "model_a": "your-exact-model-a-id",
+  "model_b": "your-exact-model-b-id",
+  "model_a_context": 32768,
+  "model_b_context": 32768,
+  "max_context_tokens": 16000,
+  "max_rounds": 1,
+  "temperature": 0.7,
+  "penalties": {
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0
+  },
+  "shared_note": "off",
+  "topic": "The actual topic that Participant A and Participant B should discuss."
+}
+```
+````
+
+The pipe removes the fenced `RUN_MANIFEST` block before assembling model prompts. The manifest's required `"topic"` value—not any surrounding ordinary text—becomes the governing conversation topic.
+
+For clarity and reproducibility, put the complete experimental instruction in the manifest's `"topic"` field. Any normal text before or after the manifest block is treated as ordinary user text and may be preserved as a human interjection or surrounding prompt context; it should not be relied on as the experimental topic.
+
+### Does block placement matter?
+
+The fenced manifest block may appear before or after ordinary text in the initial user message. The pipe searches the whole initial message for:
+
+```text
+```RUN_MANIFEST
+...
+```
+```
+
+For least ambiguity, use one initial user message containing:
+
+1. A short human label or note, if wanted.
+2. One complete `RUN_MANIFEST` block.
+3. The full experimental instruction in the manifest's `"topic"` field.
+
+Do not include more than one `RUN_MANIFEST` block in one initial user message.
+
+### File-based manifest alternative
+
+For a file-based manifest, the pipe can also look for:
+
+```text
+manifest_<RUN_TAG>.json
+```
+
+inside `LOG_DIRECTORY`, but only when no fenced `RUN_MANIFEST` block appears in the initial user prompt and the `RUN_TAG` valve is already set in Open WebUI.
+
+This is optional and is separate from `lmstudio_manual_metadata.json`.
+
+| File | Purpose | Location |
+|---|---|---|
+| Fenced `RUN_MANIFEST` in the first Open WebUI user message | Per-run experimental configuration and topic | Initial user prompt; recommended |
+| `manifest_<RUN_TAG>.json` | Optional file-based per-run manifest | `LOG_DIRECTORY`; only when no pasted manifest is supplied |
+| `lmstudio_manual_metadata.json` | Optional manual server/provenance metadata keyed by model ID | `LOG_DIRECTORY` |
+| `.txt` and `.jsonl` files | Logs created by the pipe | `LOG_DIRECTORY` |
+
 ## Example manifest
 
 This example supplies all required fields and all v2.4 optional fields:
